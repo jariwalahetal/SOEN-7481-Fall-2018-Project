@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SOEN7481.Utility
-{
+{   
     class Program
     {
 
@@ -28,8 +28,7 @@ namespace SOEN7481.Utility
             Console.ReadLine();
         }
 
-        private static void getProjectList()
-        {
+        private static void getProjectList() {
             try
             {
                 PrintInfo("Reading project namaes...");
@@ -48,14 +47,12 @@ namespace SOEN7481.Utility
                     }
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 PrintError(ex.Message);
             }
         }
 
-        private static async System.Threading.Tasks.Task getGitHubInfoAsync()
-        {
+        private static async System.Threading.Tasks.Task getGitHubInfoAsync() {
 
             try
             {
@@ -66,19 +63,17 @@ namespace SOEN7481.Utility
                     Client c = new Client(ownerlogin[i], repoName[i]);
                     int coreBugs = await c.GetCommitsCountsWithErrorAsync();
                     numberOfCoreBugs.Add(coreBugs);
-                    PrintInfo(repoName[i] + " - Number of bugs:" + coreBugs);
+                    PrintInfo(repoName[i] + " - Number of bugs" + coreBugs);
                 }
 
                 printResult();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 PrintInfo(ex.Message);
             }
         }
 
-        private static void printResult()
-        {
+        private static void printResult() {
             PrintInfo("Generating result...");
 
             var csv = new StringBuilder();
@@ -94,8 +89,7 @@ namespace SOEN7481.Utility
             PrintInfo("Result generated...");
         }
 
-        private static void PrintInfo(String str)
-        {
+        private static void PrintInfo(String str) {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(str);
             Console.ResetColor();
@@ -110,4 +104,3 @@ namespace SOEN7481.Utility
 
     }
 }
-
