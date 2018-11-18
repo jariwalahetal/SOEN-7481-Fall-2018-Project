@@ -15,6 +15,7 @@ namespace SOEN7481.Utility
         static List<string> repoName = new List<string>();
         static List<string> ownerlogin = new List<string>();
         static List<int> numberOfCoreBugs = new List<int>();
+        static List<int> coreDevelopersCounts = new List<int>();
 
         static void Main(string[] args)
         {
@@ -63,17 +64,26 @@ namespace SOEN7481.Utility
                 //Get information from Github
                 for (int i = 0; i < repoName.Count; i++)
                 {
+                    PrintInfo("Current reponame - " + repoName[i]);
+
                     Client c = new Client(ownerlogin[i], repoName[i]);
+
+                    PrintInfo("Getting core bugs");
                     int coreBugs = await c.GetCommitsCountsWithErrorAsync();
                     numberOfCoreBugs.Add(coreBugs);
                     PrintInfo(repoName[i] + " - Number of bugs:" + coreBugs);
+
+                    PrintInfo("Getting core developers");
+                    int count = await c.GetCoreDeveloerCountAsync();
+                    coreDevelopersCounts.Add(count);
+                    PrintInfo(repoName[i] + " - Core developers count:" + count);
                 }
 
                 printResult();
             }
             catch (Exception ex)
             {
-                PrintInfo(ex.Message);
+                PrintError(ex.Message);
             }
         }
 
@@ -86,7 +96,7 @@ namespace SOEN7481.Utility
 
             for (int i = 0; i < repoName.Count; i++)
             {
-                var newLine = string.Format("{0},{1},{2},{3}", repoName[i], ownerlogin[i], numberOfCoreBugs[i], "11");
+                var newLine = string.Format("{0},{1},{2},{3}", repoName[i], ownerlogin[i], numberOfCoreBugs[i], coreDevelopersCounts[i]);
                 csv.AppendLine(newLine);
             }
 
@@ -94,7 +104,7 @@ namespace SOEN7481.Utility
             PrintInfo("Result generated...");
         }
 
-        private static void PrintInfo(String str)
+        public static void PrintInfo(String str)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(str);
