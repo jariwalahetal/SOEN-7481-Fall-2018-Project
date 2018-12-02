@@ -36,9 +36,9 @@ namespace SOEN7481.Utility.ResponseHelper
         public List<object> assignees { get; set; }
         public object milestone { get; set; }
         public int comments { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
-        public DateTime closed_at { get; set; }
+        public string created_at { get; set; }
+        public string updated_at { get; set; }
+        public string closed_at { get; set; }
         public string author_association { get; set; }
         public string body { get; set; }
         public PullRequest pull_request { get; set; }

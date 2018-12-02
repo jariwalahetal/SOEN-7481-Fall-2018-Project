@@ -1,1 +1,4 @@
 repo_name,owner_login,core_bugs,core_developer,total_merged_pr,total_rejected_pr,merged_pr_by_core_developer,rejected_pr_by_core_developers,merged_pr_by_ext_developer,rejected_pr_by_ext_developer
+dagger,square,180,25,244,39,5,0,239,39
+deegree3,deegree,1786,9,482,102,85,0,397,102
+Tower,droidplanner,1093,13,734,152,35,0,699,152

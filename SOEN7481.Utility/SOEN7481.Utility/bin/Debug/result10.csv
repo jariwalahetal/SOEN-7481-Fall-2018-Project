@@ -1,0 +1,4 @@
+repo_name,owner_login,core_bugs,core_developer,total_merged_pr,total_rejected_pr,merged_pr_by_core_developer,rejected_pr_by_core_developers,merged_pr_by_ext_developer,rejected_pr_by_ext_developer
+commafeed,Athou,378,2,247,29,16,0,231,29
+commons,twitter,561,42,176,125,7,0,169,125
+CONNECT,CONNECT-Solution,226,31,1640,172,315,0,1325,172

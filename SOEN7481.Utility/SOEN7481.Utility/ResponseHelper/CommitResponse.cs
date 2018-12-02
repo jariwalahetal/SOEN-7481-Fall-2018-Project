@@ -11,7 +11,7 @@ namespace SOEN7481.Utility.ResponseHelper
     {
         public string name { get; set; }
         public string email { get; set; }
-        public DateTime date { get; set; }
+        public string date { get; set; }
     }
 
     public class Committer

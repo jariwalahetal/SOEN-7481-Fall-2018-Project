@@ -23,7 +23,7 @@ namespace SOEN7481.Utility
         private List<string> coreDevelopers;
 
         static List<string> tokens = new List<string> {
-            "7b84ebec3dd096e3c24a5277bc0c01229bff31a2",
+            "0de3915ba50871d4add0ae71c6cea07e41316ee5",
         };
 
         static int tokenId = 0;
@@ -42,7 +42,7 @@ namespace SOEN7481.Utility
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("Accept", " application/vnd.github.inertia-preview+json");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens[tokenId]);
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("shriyans16");
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("jariwalahetal");
             string queryString = "";
             while (true)
             {
@@ -116,24 +116,21 @@ namespace SOEN7481.Utility
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens[tokenId]);
             client.DefaultRequestHeaders.UserAgent.ParseAdd("jariwalahetal");
             string queryString = "";
-            while (true)
+            String path = String.Format("orgs/{0}/members?role=admin", OwnerName);
+
+            HttpResponseMessage response = await client.GetAsync(path);
+            if (!validateRateLimit(response))
             {
-                String path = String.Format("orgs/{0}/members?role=admin", OwnerName);
-
-                HttpResponseMessage response = await client.GetAsync(path);
-                if (!validateRateLimit(response))
-                {
-                    breakOperation = true;
-                    return null;
-                }
-                if (response.IsSuccessStatusCode)
-                {
-                    string s = await response.Content.ReadAsStringAsync();
-                    var members = JsonConvert.DeserializeObject<List<MemberResponse>>(s);
-                    return members.Select(x => x.id.ToString()).ToList();
-                }
-
+                breakOperation = true;
+                return null;
             }
+            if (response.IsSuccessStatusCode)
+            {
+                string s = await response.Content.ReadAsStringAsync();
+                var members = JsonConvert.DeserializeObject<List<MemberResponse>>(s);
+                return members.Select(x => x.id.ToString()).ToList();
+            }
+            return new List<string>();
         }
 
         private async Task<List<string>> GetPullRequestAcceptedLoginIdAsync()
@@ -185,7 +182,8 @@ namespace SOEN7481.Utility
                     {
                         if (commit?.author?.id != commit?.committer?.id)
                         {
-                            coreDevelopersIds.Add(commit.committer.id.ToString());
+                            if(commit!=null && commit.committer!=null )
+                                coreDevelopersIds.Add(commit.committer.id.ToString());
                         }
                     }
                 }
@@ -255,9 +253,15 @@ namespace SOEN7481.Utility
                 {
                     string s = await response.Content.ReadAsStringAsync();
                     var issueResponse = JsonConvert.DeserializeObject<ClosedIssueResponse>(s);
-                    if (issueResponse.user.id != issueResponse.closed_by.id)
+                    if (issueResponse != null && issueResponse.user != null && issueResponse.closed_by != null)
                     {
-                        coreDevelopersIds.Add(issueResponse.closed_by.id.ToString());
+                        if (issueResponse.user.id != null && issueResponse.closed_by.id != null)
+                        {
+                            if (issueResponse.user.id != issueResponse.closed_by.id)
+                            {
+                                coreDevelopersIds.Add(issueResponse.closed_by.id.ToString());
+                            }
+                        }
                     }
                 }
             }
@@ -375,7 +379,7 @@ namespace SOEN7481.Utility
             double limitRest = Convert.ToDouble(headers.Substring(headers.IndexOf("X-RateLimit-Reset: ") + 19).Substring(0, headers.Substring(headers.IndexOf("X-RateLimit-Reset: ") + 19).IndexOf("\r\n")));
 
             DateTime resumeTime = FromUnixTime(limitRest);
-            if (pendingRequests < 5)
+            if (pendingRequests < 1)
             {
                 return false;
             }

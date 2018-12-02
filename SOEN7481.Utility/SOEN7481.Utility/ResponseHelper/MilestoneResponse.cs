@@ -20,9 +20,9 @@ namespace SOEN7481.Utility.ResponseHelper
         public int open_issues { get; set; }
         public int closed_issues { get; set; }
         public string state { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public string created_at { get; set; }
+        public string updated_at { get; set; }
         public object due_on { get; set; }
-        public DateTime? closed_at { get; set; }
+        public string closed_at { get; set; }
     }
 }
