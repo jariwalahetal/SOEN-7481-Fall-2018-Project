@@ -1,0 +1,6 @@
+repo_name,owner_login,core_bugs,core_developer,total_merged_pr,total_rejected_pr,merged_pr_by_core_developer,rejected_pr_by_core_developers,merged_pr_by_ext_developer,rejected_pr_by_ext_developer
+elasticsearch,elastic,4741,67,12950,4893,5869,0,7081,4893
+gradle,gradle,397,55,3343,844,432,0,2911,844
+grails-core,grails,1873,24,671,299,177,0,494,299
+netty,netty,2129,24,617,3529,278,0,339,3529
+okhttp,square,583,22,1597,351,436,0,1161,351

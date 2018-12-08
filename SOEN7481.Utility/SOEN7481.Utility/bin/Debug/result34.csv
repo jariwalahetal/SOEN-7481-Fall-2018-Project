@@ -1,0 +1,3 @@
+repo_name,owner_login,core_bugs,core_developer,total_merged_pr,total_rejected_pr,merged_pr_by_core_developer,rejected_pr_by_core_developers,merged_pr_by_ext_developer,rejected_pr_by_ext_developer
+XChange,knowm,47,6,1465,195,51,0,1414,195
+zanata-server,zanata,2676,14,1016,302,163,0,853,302

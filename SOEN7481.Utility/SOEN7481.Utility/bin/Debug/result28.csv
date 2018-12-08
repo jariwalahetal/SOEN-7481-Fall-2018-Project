@@ -1,0 +1,4 @@
+repo_name,owner_login,core_bugs,core_developer,total_merged_pr,total_rejected_pr,merged_pr_by_core_developer,rejected_pr_by_core_developers,merged_pr_by_ext_developer,rejected_pr_by_ext_developer
+orbisgis,orbisgis,2700,8,733,32,164,0,569,32
+picasso,square,226,19,440,168,172,0,268,168
+picketlink,picketlink,330,5,466,33,1,0,465,33

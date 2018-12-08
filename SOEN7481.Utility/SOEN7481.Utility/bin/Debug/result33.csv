@@ -1,0 +1,4 @@
+repo_name,owner_login,core_bugs,core_developer,total_merged_pr,total_rejected_pr,merged_pr_by_core_developer,rejected_pr_by_core_developers,merged_pr_by_ext_developer,rejected_pr_by_ext_developer
+uPortal,Jasig,2519,34,1092,309,596,0,496,309
+vraptor4,caelum,517,35,696,92,30,0,666,92
+windup,windup,658,15,1032,254,340,0,692,254

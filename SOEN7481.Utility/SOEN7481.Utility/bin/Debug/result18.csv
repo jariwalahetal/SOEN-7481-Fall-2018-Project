@@ -1,0 +1,4 @@
+repo_name,owner_login,core_bugs,core_developer,total_merged_pr,total_rejected_pr,merged_pr_by_core_developer,rejected_pr_by_core_developers,merged_pr_by_ext_developer,rejected_pr_by_ext_developer
+fcrepo4,fcrepo4,449,21,853,511,290,0,563,511
+fizteh-java-2014,dkomanov,827,3,407,141,0,0,407,141
+georchestra,georchestra,448,20,786,120,352,0,434,120

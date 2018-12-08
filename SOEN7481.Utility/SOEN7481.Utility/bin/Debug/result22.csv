@@ -1,0 +1,5 @@
+repo_name,owner_login,core_bugs,core_developer,total_merged_pr,total_rejected_pr,merged_pr_by_core_developer,rejected_pr_by_core_developers,merged_pr_by_ext_developer,rejected_pr_by_ext_developer
+GWTP,ArcBees,347,15,374,65,4,0,370,65
+H2GIS,orbisgis,552,8,619,28,120,0,499,28
+helios,spotify,626,45,926,179,247,0,679,179
+Hydra,Findwise,191,5,199,31,0,0,199,31

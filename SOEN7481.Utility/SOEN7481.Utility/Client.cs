@@ -24,6 +24,16 @@ namespace SOEN7481.Utility
 
         static List<string> tokens = new List<string> {
             "0de3915ba50871d4add0ae71c6cea07e41316ee5",
+            "0311f2b789e51cbad098e716f85d62cb4f82349e",
+            "e1e6910ef30a7688da5190fc48da842787fa05b9",
+            "f4cc52071080c371cff5c1e605cd586d543f58ce",
+            "7b84ebec3dd096e3c24a5277bc0c01229bff31a2",
+            "64e4e50a88fc42fa58db6930ad0bb3781ba1b7c0",
+            "d71e4e626cebf9f7fe8f9ae1c6331575f9d5f2aa",
+            "2955852aa59425139be2bfc1023b709a847cc700",
+            "2920ba8d4131bdeddf505c2df62dfd53c829a5de",
+            "2403473aab9df6e1a745cafb99ce12c0049c6f8c",
+
         };
 
         static int tokenId = 0;
@@ -37,17 +47,11 @@ namespace SOEN7481.Utility
 
         public async Task<int> GetCommitsCountsWithErrorAsync()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://api.github.com/");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Accept", " application/vnd.github.inertia-preview+json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens[tokenId]);
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("jariwalahetal");
             string queryString = "";
             while (true)
             {
                 String path = String.Format("repos/{0}/{1}/commits{2}", OwnerName, RepositoryName, queryString);
-
+                var client = GetHTTPClient();
                 HttpResponseMessage response = await client.GetAsync(path);
                 if (!validateRateLimit(response))
                 {
@@ -109,15 +113,10 @@ namespace SOEN7481.Utility
 
         private async Task<List<string>> GetAdminMembersAsync()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://api.github.com/");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Accept", " application/vnd.github.inertia-preview+json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens[tokenId]);
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("jariwalahetal");
             string queryString = "";
             String path = String.Format("orgs/{0}/members?role=admin", OwnerName);
 
+            var client = GetHTTPClient();
             HttpResponseMessage response = await client.GetAsync(path);
             if (!validateRateLimit(response))
             {
@@ -137,18 +136,12 @@ namespace SOEN7481.Utility
         {
             List<string> coreDevelopersIds = new List<string>();
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://api.github.com/");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Accept", " application/vnd.github.inertia-preview+json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens[tokenId]);
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("jariwalahetal");
             string queryString = "";
             int pageno = 1;
             while (true)
             {
                 String path = String.Format("repos/{0}/{1}/pulls?state=closed&page={2}", OwnerName, RepositoryName, pageno++);
-
+                var client = GetHTTPClient();
                 HttpResponseMessage response = await client.GetAsync(path);
                 if (!validateRateLimit(response))
                 {
@@ -195,18 +188,23 @@ namespace SOEN7481.Utility
             return coreDevelopersIds;
         }
 
-        private async Task<List<string>> GetIssuesClosedLoginIdAsync()
-        {
-            List<string> coreDevelopersIds = new List<string>();
-
-            List<IssuesResponse> allClosedIssues = new List<IssuesResponse>();
-
+        private HttpClient GetHTTPClient() {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://api.github.com/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("Accept", " application/vnd.github.inertia-preview+json");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens[tokenId]);
             client.DefaultRequestHeaders.UserAgent.ParseAdd("jariwalahetal");
+            return client;
+        }
+
+        private async Task<List<string>> GetIssuesClosedLoginIdAsync()
+        {
+            List<string> coreDevelopersIds = new List<string>();
+
+            List<IssuesResponse> allClosedIssues = new List<IssuesResponse>();
+
+           
 
             List<string> milestones = await GetMilestones();
 
@@ -216,7 +214,7 @@ namespace SOEN7481.Utility
                 while (true)
                 {
                     String path = String.Format("repos/{0}/{1}/issues?state=closed&page={2}&milestone={3}", OwnerName, RepositoryName, pageno++, milestone);
-
+                    var client = GetHTTPClient();
                     HttpResponseMessage response = await client.GetAsync(path);
                     if (!validateRateLimit(response))
                     {
@@ -242,7 +240,7 @@ namespace SOEN7481.Utility
             foreach (var request in allClosedIssues)
             {
                 String path = String.Format("repos/{0}/{1}/issues/{2}", OwnerName, RepositoryName, request.number);
-
+                var client = GetHTTPClient();
                 HttpResponseMessage response = await client.GetAsync(path);
                 if (!validateRateLimit(response))
                 {
@@ -272,18 +270,12 @@ namespace SOEN7481.Utility
         {
             List<string> milestoneNumbers = new List<string>();
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://api.github.com/");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Accept", " application/vnd.github.inertia-preview+json");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens[tokenId]);
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("jariwalahetal");
             string queryString = "";
             int pageno = 1;
             while (true)
             {
                 String path = String.Format("repos/{0}/{1}/milestones?state=all&page={2}", OwnerName, RepositoryName, pageno++);
-
+                var client = GetHTTPClient();
                 HttpResponseMessage response = await client.GetAsync(path);
                 if (!validateRateLimit(response))
                 {
@@ -379,9 +371,13 @@ namespace SOEN7481.Utility
             double limitRest = Convert.ToDouble(headers.Substring(headers.IndexOf("X-RateLimit-Reset: ") + 19).Substring(0, headers.Substring(headers.IndexOf("X-RateLimit-Reset: ") + 19).IndexOf("\r\n")));
 
             DateTime resumeTime = FromUnixTime(limitRest);
-            if (pendingRequests < 1)
+            if (pendingRequests < 5)
             {
-                return false;
+                tokenId++;
+                if (tokenId >= tokens.Count()) {
+                    return false;
+                }
+                return true;
             }
             return true;
         }

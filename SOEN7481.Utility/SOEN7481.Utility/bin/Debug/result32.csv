@@ -1,0 +1,5 @@
+repo_name,owner_login,core_bugs,core_developer,total_merged_pr,total_rejected_pr,merged_pr_by_core_developer,rejected_pr_by_core_developers,merged_pr_by_ext_developer,rejected_pr_by_ext_developer
+seqware,SeqWare,571,8,310,22,22,0,288,22
+Spout,SpoutDev,985,16,397,130,0,0,397,130
+stratosphere,stratosphere,1104,13,119,302,0,0,119,302
+tajo,apache,233,33,14,1007,1,0,13,1007
