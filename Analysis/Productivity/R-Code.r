@@ -7,15 +7,15 @@ library(AER)
 
 mydata<- read.csv("C:\\Users\\win10\\Desktop\\productivity.csv")
 attach(mydata)
-
+	
 # Define variables
 Y1 <- cbind(merged_pr_by_core_developer)
 Y2 <- cbind(rejected_pr_by_core_developers)
 Y3 <- cbind(merged_pr_by_ext_developer)
 Y4 <- cbind(rejected_pr_by_ext_developer)
 
-X1 <- cbind(ï..team_size, proj_age, computed_n_stars, computed_n_forks, computed_n_src_loc, ci_integration)
-X2 <- cbind(ï..team_size, proj_age, computed_n_stars, computed_n_forks, computed_n_src_loc, ci_integration)
+X1 <- cbind(ï..team_size, proj_age, computed_n_forks, computed_n_src_loc, ci_integration)
+X2 <- cbind(ï..team_size, proj_age, computed_n_forks, computed_n_src_loc, ci_integration)
 
 # Descriptive statistics
 summary(Y1)
