@@ -29,7 +29,7 @@ summary(poissonmodel)
 dispersiontest(poissonmodel)
 
 # Zero-inflated negative binomial model coefficients
-zinb <- zeroinfl(Y1 ~ X1, link = "logit", dist = "poisson")
+zinb <- zeroinfl(Y1 ~ X1, link = "logit", dist = "negbin")
 summary(zinb)
 
 #vuong test
